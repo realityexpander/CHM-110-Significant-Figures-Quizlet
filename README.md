@@ -30,7 +30,7 @@ Prompt for Gemini AI:
 https://share.google/aimode/8un8RWXo4JFjsZ0U8
 
 Advanced Quiz:
-# Chemistry Significant Figures Advanced Quiz
+# Chemistry Advanced Significant Figures Quiz
 
 <img width="713" alt="image" src="https://github.com/user-attachments/assets/95b9da0a-026b-48cd-b65b-764ff0b85900" />
 
