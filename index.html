@@ -72,6 +72,21 @@
             margin-right: 12px;
             transform: scale(1.1);
         }
+        .hint-details {
+            margin: 15px 0;
+            background: #edf2f7;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 0.95em;
+            color: #4a5568;
+            border-left: 4px solid #4a5568;
+        }
+        .hint-summary {
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+        }
         .feedback {
             margin-top: 20px;
             padding: 15px;
@@ -158,120 +173,131 @@
             q: "How many significant figures are in the measurement 0.003050 g?",
             options: ["3", "5", "4", "6"],
             correct: 2,
+            hint: "Separate the leading zeros from the rest of the digits. Zeros at the end of a number after a decimal are significant.",
             feedback: [
-                "Incorrect. Leading zeros are never counted as significant figures. You may have missed the trailing zero after the 5.",
-                "Incorrect. This overcounts by including the leading placeholder zeros which carry no significance regarding measured precision.",
-                "Correct! The leading zeros are placeholders and not significant. The digits 3, 0, 5, and the final trailing zero after the decimal point are all significant, totaling 4.",
-                "Incorrect. This counts every single digit present, ignoring the rule that leading zeros do not count as significant figures."
+                "Incorrect. Leading zeros are never significant placeholders.",
+                "Incorrect. This overcounts leading placeholder zeros.",
+                "Correct! The leading zeros are placeholders. The digits 3, 0, 5, and the final trailing zero after the decimal are significant.",
+                "Incorrect. This counts every digit, including non-significant leading ones."
             ]
         },
         {
             q: "How many significant figures are in the number 402.105?",
             options: ["3", "4", "5", "6"],
             correct: 3,
+            hint: "Zeros located between two non-zero digits are always significant.",
             feedback: [
-                "Incorrect. Trapped zeros and digits between non-zero numbers are always significant.",
-                "Incorrect. Every digit listed here (including the trapped zero and the final non-zero digit) is part of the precision measurement.",
-                "Incorrect. Count all the individual digits shown in the number carefully from left to right.",
-                "Correct! All digits in 402.105 (4, 0, 2, 1, 0, and 5) are significant because the zero is trapped between non-zero numbers and digits after the decimal are counted."
+                "Incorrect. Trapped zeros are always significant.",
+                "Incorrect. Every digit listed is part of the precision measurement.",
+                "Incorrect. Count all individual digits from left to right.",
+                "Correct! All digits in 402.105 are significant because the zeros are trapped."
             ]
         },
         {
             q: "How many significant figures are in the value 3.020 × 10<sup>-4</sup> kg?",
             options: ["4", "3", "2", "7"],
             correct: 0,
+            hint: "Focus exclusively on the coefficient part (3.020) and ignore the exponential multiplier.",
             feedback: [
-                "Correct! In scientific notation, all digits in the coefficient (including the trapped zero and the trailing zero in the decimal portion) are significant, giving 4 significant figures.",
-                "Incorrect. Do not forget that trailing zeros in the decimal portion of a coefficient in scientific notation count as significant.",
-                "Incorrect. This underestimates the precision; coefficients in scientific notation retain all their explicit digits.",
-                "Incorrect. The power of ten factor (10^-4) does not add to the count of significant figures of the measured coefficient."
+                "Correct! In scientific notation, all digits in the coefficient are significant.",
+                "Incorrect. Trailing decimal zeros in a coefficient count.",
+                "Incorrect. Coefficients retain all explicitly written digits.",
+                "Incorrect. The power of ten factor does not add to the sig figs."
             ]
         },
         {
-            q: "The measurement 45,000 g is ambiguous regarding its precision. How should you write this value in scientific notation to correctly indicate exactly 3 significant figures?",
+            q: "The measurement 45,000 g is ambiguous. How do you write this in scientific notation to indicate exactly 3 significant figures?",
             options: ["4.5 × 10<sup>4</sup> g", "4.50 × 10<sup>4</sup> g", "4.500 × 10<sup>4</sup> g", "45.0 × 10<sup>3</sup> g"],
             correct: 1,
+            hint: "Structure your coefficient with the desired number of digits. Ensure the coefficient sits between 1 and 10.",
             feedback: [
-                "Incorrect. This format only shows 2 significant figures in the coefficient.",
-                "Correct! 4.50 × 10^4 explicitly presents a coefficient with 3 significant figures, clearing up the ambiguity of standard trailing zeros in whole integers.",
-                "Incorrect. This coefficient contains 4 significant figures instead of the requested 3.",
-                "Incorrect. While numerically equal to 45,000, a properly formatted coefficient in scientific notation must be between 1 and 10."
+                "Incorrect. This format shows only 2 significant figures.",
+                "Correct! 4.50 × 10^4 presents a coefficient with exactly 3 significant figures, clearing up ambiguity.",
+                "Incorrect. This coefficient contains 4 significant figures.",
+                "Incorrect. A proper scientific notation coefficient must be between 1 and 10."
             ]
         },
         {
-            q: "A distance is measured as 700,000 m, but you wish to express it with an explicit precision of 4 significant figures. Which representation is correct?",
+            q: "A distance is 700,000 m. Express it with an explicit precision of 4 significant figures.",
             options: ["7.0 × 10<sup>5</sup> m", "7.00 × 10<sup>5</sup> m", "7.000 × 10<sup>5</sup> m", "7 × 10<sup>5</sup> m"],
             correct: 2,
+            hint: "Count the number of digits inside the coefficient to construct exactly four significant figures.",
             feedback: [
-                "Incorrect. This provides only 2 significant figures instead of the requested 4.",
-                "Incorrect. This gives 3 significant figures, which falls short of the target count of 4.",
-                "Correct! Writing the coefficient as 7.000 yields exactly 4 significant figures while correctly representing the original scale of 700,000 m.",
+                "Incorrect. This provides only 2 significant figures.",
+                "Incorrect. This gives 3 significant figures.",
+                "Correct! Writing the coefficient as 7.000 yields exactly 4 significant figures while preserving the scale.",
                 "Incorrect. This reduces the value to a single significant figure."
             ]
         },
         {
-            q: "How must the value 3000 L be written in scientific notation to unambiguously show that it has 2 significant figures?",
+            q: "How must the value 3000 L be written in scientific notation to show exactly 2 significant figures?",
             options: ["3 × 10<sup>3</sup> L", "3.000 × 10<sup>3</sup> L", "3.00 × 10<sup>3</sup> L", "3.0 × 10<sup>3</sup> L"],
             correct: 3,
+            hint: "Match the total number of digits in the coefficient to your target significant figure constraint.",
             feedback: [
                 "Incorrect. This coefficient shows only 1 significant figure.",
-                "Incorrect. This implies 4 significant figures instead of the required 2.",
-                "Incorrect. This shows 3 significant figures rather than 2.",
-                "Correct! The coefficient 3.0 has exactly 2 significant figures, providing an unambiguous standard format for this precision."
+                "Incorrect. This implies 4 significant figures.",
+                "Incorrect. This shows 3 significant figures.",
+                "Correct! The coefficient 3.0 has exactly 2 significant figures, providing an unambiguous format."
             ]
         },
         {
             q: "What is the sum of 14.2 mL, 8.35 mL, and 1.021 mL, reported to the correct number of decimal places?",
             options: ["23.6 mL", "23.571 mL", "23.57 mL", "24 mL"],
             correct: 0,
+            hint: "For addition, the result is limited by the measurement with the fewest decimal places.",
             feedback: [
-                "Correct! The raw sum is 23.571 mL. For addition and subtraction, the result is limited by the number with the fewest decimal places (14.2 mL has one decimal place), so you round to one decimal place: 23.6 mL.",
-                "Incorrect. This is the raw mathematical calculation without applying the rule of limiting decimal precision.",
-                "Incorrect. This retains two decimal places, which exceeds the precision supported by 14.2 mL.",
-                "Incorrect. This rounds too aggressively to whole numbers, ignoring the valid tenths place."
+                "Correct! The raw sum is 23.571 mL. 14.2 mL limits the precision to one decimal place, so we round to 23.6 mL.",
+                "Incorrect. This is the raw calculation without significant figure rules applied.",
+                "Incorrect. This retains two decimal places, which exceeds 14.2 mL precision.",
+                "Incorrect. This rounds too aggressively to whole numbers."
             ]
         },
         {
-            q: "Evaluate the subtraction problem: 352.4 g - 7.15 g, following the correct rules for significant figures.",
+            q: "Evaluate the subtraction problem: 352.4 g - 7.15 g.",
             options: ["345.25 g", "345.3 g", "345 g", "345.2 g"],
             correct: 1,
+            hint: "Check the number of decimal places in both terms. Round your final result to match the lesser decimal place count.",
             feedback: [
-                "Incorrect. This retains unrounded digits beyond the limiting decimal place of the original measurements.",
-                "Correct! The raw difference is 345.25 g. Since 352.4 g limits the precision to the tenths place (1 decimal place), 345.25 rounds up to 345.3 g.",
-                "Incorrect. This rounds away the tenths place value which is validly maintained from 352.4 g.",
-                "Incorrect. This fails to round the 2 up to a 3 based on the following digit (5)."
+                "Incorrect. This retains unrounded digits beyond the limiting decimal place.",
+                "Correct! The raw difference is 345.25 g. 352.4 g limits the precision to the tenths place, so it rounds to 345.3 g.",
+                "Incorrect. This rounds away the valid tenths place value.",
+                "Incorrect. This fails to round the 2 up based on the following digit 5."
             ]
         },
         {
-            q: "What is the area of a floor measuring 4.2 m by 5.65 m, reported to the proper number of significant figures?",
+            q: "What is the area of a floor measuring 4.2 m by 5.65 m?",
             options: ["23.73 m²", "23.7 m²", "24 m²", "23 m²"],
             correct: 2,
+            hint: "Multiplication uses total significant figure counts. Round to match the factor with the fewest total sig figs.",
             feedback: [
-                "Incorrect. This is the unrounded calculator value and ignores the limitation of significant figures.",
-                "Incorrect. This retains 3 significant figures, but the factor 4.2 has only 2 significant figures.",
-                "Correct! The raw product is 23.73 m². Multiplication results are limited by the factor with the fewest significant figures (4.2 m has 2 sig figs), requiring the answer to be rounded to 2 significant figures (24 m²).",
-                "Incorrect. This rounds down incorrectly; 23.73 must round up when restricted to two significant figures."
+                "Incorrect. This is the unrounded calculator value.",
+                "Incorrect. This retains 3 sig figs, but 4.2 has only 2 sig figs.",
+                "Correct! The raw product is 23.73 m². 4.2 m has 2 sig figs, requiring the answer to round to 24 m².",
+                "Incorrect. This rounds down incorrectly; 23.73 must round up."
             ]
         },
         {
-            q: "Calculate the density of an object with a mass of 18.4 g and a volume of 2.3 mL, reported to the correct number of significant figures.",
+            q: "Calculate the density of an object with a mass of 18.4 g and a volume of 2.3 mL.",
             options: ["7.99 g/mL", "8 g/mL", "8.00 g/mL", "8.0 g/mL"],
             correct: 3,
+            hint: "Density equals mass divided by volume. Look for the input with the minimum total significant figure count.",
             feedback: [
-                "Incorrect. This is a mathematical miscalculation and fails to respect the total significant figures of the inputs.",
-                "Incorrect. Writing 8 g/mL drops the explicit decimal precision needed to show 2 significant figures properly.",
-                "Incorrect. This overstates precision by implying 3 significant figures, whereas 2.3 mL has only 2 sig figs.",
-                "Correct! Mass (18.4 g) has 3 significant figures, and volume (2.3 mL) has 2 significant figures. The quotient 18.4 / 2.3 = 8.0 g/mL, limited to 2 significant figures."
+                "Incorrect. This is a mathematical miscalculation.",
+                "Incorrect. Writing 8 drops the necessary decimal precision.",
+                "Incorrect. This overstates precision by implying 3 significant figures.",
+                "Correct! Mass has 3 sig figs, volume has 2. The quotient must be limited to 2 sig figs, giving 8.0 g/mL."
             ]
         },
         {
             q: "How many significant figures are in the whole number 52,000?",
             options: ["2", "5", "3", "4"],
             correct: 0,
+            hint: "Zeros at the end of a whole integer without a visible decimal point are placeholders.",
             feedback: [
-                "Correct! Trailing zeros in a whole number without an explicit decimal point are placeholder constraints, leaving only 5 and 2 as significant.",
-                "Incorrect. This counts all numeric placeholders, which overrepresents measured hardware accuracy.",
-                "Incorrect. Trailing zeros without a decimal point do not count.",
+                "Correct! Trailing zeros in a whole number without a decimal are placeholders, leaving only 5 and 2.",
+                "Incorrect. This counts all placeholder zeros.",
+                "Incorrect. Trailing zeros without a decimal do not count.",
                 "Incorrect. Only the non-zero digits are significant here."
             ]
         },
@@ -279,87 +305,95 @@
             q: "How many significant figures are in the value 500.?",
             options: ["1", "2", "3", "Infinite"],
             correct: 2,
+            hint: "An explicitly written decimal point at the very end makes trailing zeros significant.",
             feedback: [
-                "Incorrect. The decimal point at the very end indicates that the zeros were explicitly measured.",
+                "Incorrect. The decimal point indicates the zeros were explicitly measured.",
                 "Incorrect. The decimal point applies to all trailing zeros preceding it.",
-                "Correct! The presence of an explicit terminal decimal point marks all trailing zeros as significant measurements, yielding 3 sig figs.",
-                "Incorrect. This is a physical measurement, not a defined exact counting constant."
+                "Correct! The terminal decimal point marks all trailing zeros as significant, yielding 3 sig figs.",
+                "Incorrect. This is a physical measurement, not an exact constant."
             ]
         },
         {
             q: "Multiply 1.5 × 2.00. Express the answer to the correct number of significant figures.",
             options: ["3", "3.0", "3.00", "3.000"],
             correct: 1,
+            hint: "Count total significant figures in both terms and use the lower total to limit your output.",
             feedback: [
-                "Incorrect. This drops essential precision; 1.5 dictates that our final calculation must maintain exactly 2 sig figs.",
-                "Correct! 1.5 contains 2 significant figures, while 2.00 contains 3. Multiplication defaults to the lower total count (2), resulting in 3.0.",
-                "Incorrect. This carries 3 significant figures, which violates the constraint limit of 1.5.",
-                "Incorrect. This overstates the precision boundary significantly."
+                "Incorrect. This drops essential precision.",
+                "Correct! 1.5 contains 2 significant figures. Multiplication defaults to the lower total count (2), resulting in 3.0.",
+                "Incorrect. This carries 3 significant figures, violating the limit set by 1.5.",
+                "Incorrect. This overstates precision significantly."
             ]
         },
         {
             q: "Calculate 10.000 ÷ 2.0 and report the answer with the correct precision limits.",
             options: ["5", "5.0", "5.00", "5.000"],
             correct: 1,
+            hint: "Count total significant digits in both terms. The less precise term rules the output layout.",
             feedback: [
                 "Incorrect. This only reflects 1 significant figure.",
-                "Correct! 10.000 has 5 sig figs, but 2.0 has only 2 sig figs. The division rule requires rounding to match the minimum total count (2), resulting in 5.0.",
-                "Incorrect. This overrepresents the limitations dictated by the divisor 2.0.",
-                "Incorrect. This drops validation constraints for division operations."
+                "Correct! 10.000 has 5 sig figs, but 2.0 has only 2. The result must match the minimum total count (2), giving 5.0.",
+                "Incorrect. This overrepresents the limitations dictated by 2.0.",
+                "Incorrect. This ignores division rules."
             ]
         },
         {
-            q: "Express the decimal value 0.000034 in proper scientific notation while preserving significant figures.",
+            q: "Express the decimal value 0.000034 in proper scientific notation while preserving sig figs.",
             options: ["34 × 10<sup>-6</sup>", "3.4 × 10<sup>-5</sup>", "3.40 × 10<sup>-5</sup>", "0.34 × 10<sup>-4</sup>"],
             correct: 1,
+            hint: "Identify the significant digits first. Your coefficient must sit strictly between 1 and 10.",
             feedback: [
                 "Incorrect. The coefficient must be a number between 1 and 10.",
-                "Correct! 0.000034 contains exactly 2 significant figures (leading zeros do not count). Moving the decimal 5 places right yields 3.4 × 10^-5.",
+                "Correct! 0.000034 contains exactly 2 sig figs. Moving the decimal 5 places right yields 3.4 × 10^-5.",
                 "Incorrect. Adding a trailing zero changes the precision to 3 significant figures.",
-                "Incorrect. Standard scientific notation requires a single non-zero digit to the left of the decimal."
+                "Incorrect. Scientific notation requires a single non-zero digit to the left of the decimal."
             ]
         },
         {
             q: "Evaluate the addition operation 100.5 + 0.025 and apply the proper rounding constraints.",
             options: ["100.525", "100.53", "100.5", "101"],
             correct: 2,
+            hint: "Focus entirely on positions after the decimal point. The least precise column depth rules.",
             feedback: [
                 "Incorrect. This is the unrounded calculator output.",
-                "Incorrect. Addition focuses on decimal places, not significant figure count configurations.",
-                "Correct! For addition, the result is limited by the least number of decimal places. 100.5 has 1 decimal place, so 100.525 rounds to 100.5.",
-                "Incorrect. This rounds away valid tenths-place measurement details."
+                "Incorrect. Addition focuses on decimal places, not significant figure totals.",
+                "Correct! 100.5 has 1 decimal place, so 100.525 rounds down to 100.5.",
+                "Incorrect. This rounds away valid tenths-place details."
             ]
         },
         {
-            q: "Perform the multi-step operation: (2.50 × 4.0) ÷ 1.234. Round the final value properly.",
+            q: "Perform the multi-step operation: (2.50 × 4.0) ÷ 1.234.",
             options: ["8.1037", "8.10", "8.1", "8"],
             correct: 2,
+            hint: "Track sig figs step by step. The product inside the parentheses establishes constraints before dividing.",
             feedback: [
                 "Incorrect. This is unrounded calculator output.",
-                "Incorrect. Review the limiting intermediate step counts closely.",
-                "Correct! The product (2.50 × 4.0) evaluates to 10. (limited to 2 sig figs by 4.0). Then, 10. ÷ 1.234 forces the final quotient to maintain 2 sig figs, yielding 8.1.",
-                "Incorrect. This undercuts precision down to a single digit boundary."
+                "Incorrect. Review the limiting intermediate step counts.",
+                "Correct! The product (2.50 × 4.0) evaluates to 10. (limited to 2 sig figs by 4.0). Then, 10. ÷ 1.234 forces the final answer to keep 2 sig figs, yielding 8.1.",
+                "Incorrect. This undercuts precision down to a single digit."
             ]
         },
         {
             q: "How many significant figures are in an exact conversion factor definition, such as 1 inch = 2.54 cm?",
             options: ["1", "3", "4", "Infinite"],
             correct: 3,
+            hint: "Defined conversions are absolute definitions, not estimated measurements.",
             feedback: [
-                "Incorrect. Defined conversions are not approximated measurements.",
-                "Incorrect. Do not apply standard trailing/trapped digits counting rules to established unit definitions.",
-                "Incorrect. Definitions do not limit calculation precision calculations.",
-                "Correct! Pure definitions, counting constants, or exact items possess infinite significant figures and never limit calculation precision boundaries."
+                "Incorrect. Defined conversions are not approximated values.",
+                "Incorrect. Do not apply standard measuring rules to unit definitions.",
+                "Incorrect. Definitions do not limit calculation precision.",
+                "Correct! Pure definitions, counting constants, or exact items possess infinite significant figures and never limit precision calculations."
             ]
         },
         {
             q: "Multiply (6.02 × 10<sup>23</sup>) × (2.0 × 10<sup>-2</sup>) and express the result in proper scientific notation.",
             options: ["1.204 × 10<sup>22</sup>", "1.20 × 10<sup>22</sup>", "1.2 × 10<sup>22</sup>", "12 × 10<sup>21</sup>"],
             correct: 2,
+            hint: "The multiplier with fewer total digits determines final rounding constraints.",
             feedback: [
                 "Incorrect. This retains 4 sig figs, which exceeds the limitation set by 2.0.",
                 "Incorrect. This implies 3 significant figures of precision.",
-                "Correct! 6.02 has 3 sig figs, while 2.0 has 2 sig figs. The product must contain 2 significant figures. 12.04 × 10^21 normalizes to 1.2 × 10^22.",
+                "Correct! 6.02 has 3 sig figs, while 2.0 has 2. The product must contain 2 significant figures, giving 1.2 × 10^22.",
                 "Incorrect. The coefficient must remain between 1 and 10."
             ]
         },
@@ -367,11 +401,12 @@
             q: "How many significant figures are in the ultra-small measurement 0.0000007 m?",
             options: ["1", "7", "8", "Ambiguous"],
             correct: 0,
+            hint: "Are leading zeros considered active accuracy numbers or standard placeholders?",
             feedback: [
-                "Correct! All leading zeros in a decimal scale are purely positional placeholders. Only the terminal digit 7 is significant, yielding 1 sig fig.",
-                "Incorrect. This counts the positional placeholders tracking scale depth.",
+                "Correct! All leading zeros in a decimal scale are purely positional placeholders. Only the digit 7 is significant, yielding 1 sig fig.",
+                "Incorrect. This counts positional placeholder zeros.",
                 "Incorrect. Do not count leading zeros.",
-                "Incorrect. Small decimal measurements with non-zero terminal numbers are perfectly unambiguous."
+                "Incorrect. Small decimal measurements with non-zero terminal numbers are unambiguous."
             ]
         }
     ];
@@ -405,6 +440,10 @@
             qBlock.innerHTML = `
                 <div class="question-text">${qIdx + 1}. ${item.q}</div>
                 ${optionsHTML}
+                <details class="hint-details">
+                    <summary class="hint-summary">💡 Need a Hint?</summary>
+                    <p style="margin: 8px 0 0 0;">${item.hint}</p>
+                </details>
                 <div id="feedbackBox${qIdx}" class="feedback"></div>
             `;
             container.appendChild(qBlock);
@@ -449,6 +488,9 @@
             
             const radios = document.querySelectorAll(`input[name="qRadio${currentQuestionIdx}"]`);
             radios.forEach(r => r.disabled = true);
+
+            const activeDetails = document.querySelector(`.question-block.active .hint-details`);
+            if (activeDetails) activeDetails.removeAttribute('open');
 
             feedbackBox.innerHTML = currentItem.feedback[selectedIdx];
             
