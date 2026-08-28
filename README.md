@@ -13,5 +13,5 @@ Final prompt for Gemini AI:
 
 4) Make sure to provide the downloadable file because just giving the text is making an error because of text injection about "Use code with caution."
 
-Here is the link to the original conversation: (WARNING: it made a lot of accidental code generations)
-https://share.google/aimode/J9FxczgkmggpPGl4d
+Here is the link to the original conversation: (WARNING: it made a lot of accidental mistaken code generations)
+https://share.google/aimode/8un8RWXo4JFjsZ0U8
