@@ -6,7 +6,7 @@ Here is a comprehensive, 20-question practice exam covering all areas of signifi
 Live Web App:
 https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/
 
-🌟 Key Features Included in Your Downloadable Quiz File
+🌟 Key Features of Quiz
   - 20 Advanced Questions:
     - Fully expanded tracking database exploring zero categories, non-zeros, decimal limits, explicit terminal periods (500.), multi-step operations, and defined exact dimensions.
   - 3 Mandatory Scientific Notation Problems:
@@ -16,7 +16,7 @@ https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/
   - Initial-Choice Scoring & Multi-Choice Exploration:
     - The scoring function logs and locks points based strictly on the initial radio option choice input. However, users can still click around afterward to investigate alternatives; the active feedback block updates dynamically to supply the reason for correctness/incorrectness matching the last-clicked option.
   - Expandable Accordion Hints Drawers:
-    - Incorporates a 💡 Need a Hint? drop-down script frame under each individual question block that auto-collapses smoothly when jumping rows.
+    - Incorporates a "💡 Need a Hint?" drop-down menu under each individual question block that auto-collapses smoothly when jumping rows.
 
 Prompt for Gemini AI:
   1) Provide a downloadable link for the html code, not just generate code text.
