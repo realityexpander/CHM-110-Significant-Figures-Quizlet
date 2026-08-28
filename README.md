@@ -1,4 +1,4 @@
-# CHM-110 Comprehensive Significant Figures Quizlet with Hints
+# CHM-110 Comprehensive Significant Figures Mutliple Choice Quizlet with Hints & Advanced Quiz
 Here is a comprehensive, 20-question practice exam covering all areas of significant figures, including identifying counts, basic calculations, multi-step operations, and mandatory scientific notation conversions.
 
 <img width="634" height="592" alt="image" src="https://github.com/user-attachments/assets/964b023a-72af-449a-bfaf-857310f9b657" />
@@ -18,8 +18,7 @@ https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/
   - Expandable Accordion Hints Drawers:
     - Incorporates a 💡 Need a Hint? drop-down script frame under each individual question block that auto-collapses smoothly when jumping rows.
 
-
-Final prompt for Gemini AI:
+Prompt for Gemini AI:
   1) Provide a downloadable link for the html code, not just generate code text.
   2) Write the html code in a single downloadable file for the above quiz exactly as you presented it.  Except make it 20 questions, not 10. 
   3) Be sure to give the "hints" drop-down section. 
@@ -27,6 +26,106 @@ Final prompt for Gemini AI:
   5) Allow for "correct" and "incorrect" choices, like you have in your quiz.
   6) Only score the initial choice, but allow for multiple choices, and give the reason for the choice being wrong or right based on the last option chosen.
   7) Make sure to provide the downloadable file because just giving the text is making an error because of text injection about "Use code with caution."
+
+Advanced Quiz:
+# Chemistry Significant Figures Advanced Quiz
+
+<img width="713" alt="image" src="https://github.com/user-attachments/assets/95b9da0a-026b-48cd-b65b-764ff0b85900" />
+
+Link to advanced quiz:
+https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/advanced_significant_figures_chemistry_quiz.html
+
+An interactive, single-page HTML quiz designed to help chemistry students practice and master **significant figures (sig figs)**.
+
+The app covers both the standard rules and common edge cases students encounter in introductory chemistry, including counting significant figures, rounding, arithmetic operations, scientific notation, exact numbers, and multi-step calculations.
+
+## Features
+
+* **Counting Significant Figures**
+
+  * Leading zeros
+  * Trailing zeros
+  * Captive zeros
+  * Decimal-point rules
+  * Ambiguous whole numbers
+  * Scientific notation
+
+* **Multiplication & Division**
+
+  * Applies the fewest-significant-figures rule
+  * Includes decimal and scientific-notation problems
+
+* **Addition & Subtraction**
+
+  * Applies the decimal-place rule
+  * Tests the important distinction between decimal-place precision and number of significant figures
+
+* **Multi-Step Calculations**
+
+  * Combines addition, subtraction, multiplication, and division
+  * Reinforces the use of guard digits
+  * Avoids premature rounding
+
+* **Scientific Notation**
+
+  * Converting between standard and scientific notation
+  * Preserving significant figures
+  * Rounding that changes the exponent
+  * Representing trailing zeros unambiguously
+
+* **Chemistry Edge Cases**
+
+  * Exact counted numbers
+  * Exact conversion factors
+  * Results near zero
+  * Rounding across place values
+  * Numbers such as `1000`, `100.0`, and `0.0100`
+
+## Interactive Quiz
+
+Each question includes:
+
+* Immediate answer checking
+* Correct/incorrect feedback
+* Explanation of the significant-figure rule involved
+* Optional hints
+* Running score
+* Accuracy percentage
+* Question progress
+* Shuffled questions
+
+Students can select focused practice sets for:
+
+* Mixed Practice
+* Counting Significant Figures
+* Multiplication & Division
+* Addition & Subtraction
+* Multi-Step Problems
+* Scientific Notation
+* Edge Cases
+
+## No Installation Required
+
+The entire application is contained in a **single HTML file**.
+
+There are:
+
+* No external JavaScript libraries
+* No frameworks
+* No server requirements
+* No database
+* No build process
+
+Simply download the HTML file and open it in a modern web browser.
+
+Because the application runs entirely in the browser, it can also be hosted easily using **GitHub Pages** or any basic static web server.
+
+## Purpose
+
+This project is intended as a study and review tool for students taking **General Chemistry, Introductory Chemistry, or other science courses where measurement precision and significant figures are required**.
+
+The emphasis is not simply on getting the numerical answer correct, but on understanding **why a particular number of significant figures or decimal places must be reported**.
+
 
 Here is the link to the original conversation: (WARNING: it made a lot of accidental mistaken code generations)
 https://share.google/aimode/8un8RWXo4JFjsZ0U8
