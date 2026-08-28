@@ -29,8 +29,10 @@ Prompt for Gemini AI:
   8) Here is the link to the original conversation: (WARNING: it made a lot of accidental mistaken code generations)
 https://share.google/aimode/8un8RWXo4JFjsZ0U8
 
-Advanced Quiz:
-# Chemistry Advanced Significant Figures Quiz
+# Advanced Quiz:
+## Advanced Significant Figures Quiz App
+
+For simulation of a written test.
 
 <img width="713" alt="image" src="https://github.com/user-attachments/assets/95b9da0a-026b-48cd-b65b-764ff0b85900" />
 
