@@ -95,6 +95,14 @@
             display: none;
             line-height: 1.4;
         }
+        .correct-style {
+            border-color: #31c48d !important;
+            background-color: #def7ec !important;
+        }
+        .incorrect-style {
+            border-color: #f98080 !important;
+            background-color: #fde8e8 !important;
+        }
         .correct-feedback {
             display: block;
             background-color: #def7ec;
@@ -109,7 +117,7 @@
         }
         .nav-buttons {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             margin-top: 25px;
         }
         button {
@@ -156,7 +164,8 @@
     <div id="quizForm">
         <div id="questionsContainer"></div>
         <div class="nav-buttons">
-            <button id="nextBtn" onclick="processNextStep()" disabled>Check Answer</button>
+            <button id="backBtn" onclick="navigateQuestion(-1)">Back</button>
+            <button id="nextBtn" onclick="navigateQuestion(1)">Next</button>
         </div>
     </div>
 
@@ -412,15 +421,15 @@
     ];
 
     let currentQuestionIdx = 0;
-    let score = 0;
-    let isShowingFeedback = false;
+    let initialChoices = Array(quizData.length).fill(null); // Tracks the scored option
+    let lastChoices = Array(quizData.length).fill(null);    // Tracks active visual state
 
     function initQuiz() {
         const container = document.getElementById('questionsContainer');
         container.innerHTML = '';
         currentQuestionIdx = 0;
-        score = 0;
-        isShowingFeedback = false;
+        initialChoices.fill(null);
+        lastChoices.fill(null);
         
         quizData.forEach((item, qIdx) => {
             const qBlock = document.createElement('div');
@@ -431,7 +440,7 @@
             item.options.forEach((opt, oIdx) => {
                 optionsHTML += `
                     <label class="option-label" id="label_${qIdx}_${oIdx}">
-                        <input type="radio" name="qRadio${qIdx}" value="${oIdx}" onchange="enableCheckButton()">
+                        <input type="radio" name="qRadio${qIdx}" value="${oIdx}" onclick="handleOptionSelection(${oIdx})">
                         ${opt}
                     </label>
                 `;
@@ -440,7 +449,7 @@
             qBlock.innerHTML = `
                 <div class="question-text">${qIdx + 1}. ${item.q}</div>
                 ${optionsHTML}
-                <details class="hint-details">
+                <details class="hint-details" id="hint_${qIdx}">
                     <summary class="hint-summary">💡 Need a Hint?</summary>
                     <p style="margin: 8px 0 0 0;">${item.hint}</p>
                 </details>
@@ -454,86 +463,92 @@
         updateNavigationState();
     }
 
-    function enableCheckButton() {
-        if (!isShowingFeedback) {
-            document.getElementById('nextBtn').disabled = false;
+    function handleOptionSelection(optionIdx) {
+        const currentItem = quizData[currentQuestionIdx];
+        
+        // 1. Lock and score only the very first action
+        if (initialChoices[currentQuestionIdx] === null) {
+            initialChoices[currentQuestionIdx] = optionIdx;
+        }
+        
+        // 2. Log last choice to update active UI display elements
+        lastChoices[currentQuestionIdx] = optionIdx;
+        
+        // 3. Clean active state layout borders
+        currentItem.options.forEach((_, oIdx) => {
+            const lbl = document.getElementById(`label_${currentQuestionIdx}_${oIdx}`);
+            lbl.className = "option-label";
+        });
+        
+        // 4. Update the layout feedback block based on the last selected choice
+        const feedbackBox = document.getElementById(`feedbackBox${currentQuestionIdx}`);
+        feedbackBox.innerHTML = currentItem.feedback[optionIdx];
+        
+        const activeLabel = document.getElementById(`label_${currentQuestionIdx}_${optionIdx}`);
+        if (optionIdx === currentItem.correct) {
+            feedbackBox.className = "feedback correct-feedback";
+            activeLabel.classList.add("correct-style");
+        } else {
+            feedbackBox.className = "feedback incorrect-feedback";
+            activeLabel.classList.add("incorrect-style");
+            // Show the correct selection subtly alongside the mistake
+            document.getElementById(`label_${currentQuestionIdx}_${currentItem.correct}`).classList.add("correct-style");
         }
     }
 
     function updateNavigationState() {
+        const backBtn = document.getElementById('backBtn');
         const nextBtn = document.getElementById('nextBtn');
         const progressFill = document.getElementById('progressFill');
         
-        const progressPercent = (currentQuestionIdx / quizData.length) * 100;
-        progressFill.style.width = `${progressPercent}%`;
-
-        if (!isShowingFeedback) {
-            nextBtn.innerText = "Check Answer";
-            const checkedRadio = document.querySelector(`input[name="qRadio${currentQuestionIdx}"]:checked`);
-            nextBtn.disabled = !checkedRadio;
+        progressFill.style.width = `${(currentQuestionIdx / quizData.length) * 100}%`;
+        backBtn.disabled = currentQuestionIdx === 0;
+        
+        if (currentQuestionIdx === quizData.length - 1) {
+            nextBtn.innerText = "Finish Quiz";
         } else {
-            nextBtn.innerText = currentQuestionIdx === quizData.length - 1 ? "View Results" : "Next Question";
-            nextBtn.disabled = false;
+            nextBtn.innerText = "Next";
         }
     }
 
-    function processNextStep() {
-        if (!isShowingFeedback) {
-            const selectedRadio = document.querySelector(`input[name="qRadio${currentQuestionIdx}"]:checked`);
-            if (!selectedRadio) return;
+    function navigateQuestion(direction) {
+        // Auto-close hints accordion box when changing active positions
+        const hintBox = document.getElementById`hint_${currentQuestionIdx}`;
+        if (hintBox) hintBox.removeAttribute('open');
 
-            const selectedIdx = parseInt(selectedRadio.value);
-            const currentItem = quizData[currentQuestionIdx];
-            const feedbackBox = document.getElementById(`feedbackBox${currentQuestionIdx}`);
-            
-            const radios = document.querySelectorAll(`input[name="qRadio${currentQuestionIdx}"]`);
-            radios.forEach(r => r.disabled = true);
-
-            const activeDetails = document.querySelector(`.question-block.active .hint-details`);
-            if (activeDetails) activeDetails.removeAttribute('open');
-
-            feedbackBox.innerHTML = currentItem.feedback[selectedIdx];
-            
-            if (selectedIdx === currentItem.correct) {
-                score++;
-                feedbackBox.className = "feedback correct-feedback";
-                document.getElementById(`label_${currentQuestionIdx}_${selectedIdx}`).style.borderColor = "#31c48d";
-                document.getElementById(`label_${currentQuestionIdx}_${selectedIdx}`).style.backgroundColor = "#def7ec";
-            } else {
-                feedbackBox.className = "feedback incorrect-feedback";
-                document.getElementById(`label_${currentQuestionIdx}_${selectedIdx}`).style.borderColor = "#f98080";
-                document.getElementById(`label_${currentQuestionIdx}_${selectedIdx}`).style.backgroundColor = "#fde8e8";
-                document.getElementById(`label_${currentQuestionIdx}_${currentItem.correct}`).style.borderColor = "#31c48d";
-            }
-            
-            isShowingFeedback = true;
-            updateNavigationState();
-        } else {
-            isShowingFeedback = false;
-            const currentBlock = document.getElementById(`qBlock${currentQuestionIdx}`);
-            currentBlock.classList.remove('active');
-            
-            currentQuestionIdx++;
-            
-            if (currentQuestionIdx < quizData.length) {
-                const nextBlock = document.getElementById(`qBlock${currentQuestionIdx}`);
-                nextBlock.classList.add('active');
-                updateNavigationState();
-            } else {
-                showFinalSummary();
-            }
+        if (direction === 1 && currentQuestionIdx === quizData.length - 1) {
+            showFinalSummary();
+            return;
         }
+        
+        const currentBlock = document.getElementById(`qBlock${currentQuestionIdx}`);
+        currentBlock.classList.remove('active');
+        
+        currentQuestionIdx += direction;
+        
+        const nextBlock = document.getElementById(`qBlock${currentQuestionIdx}`);
+        nextBlock.classList.add('active');
+        
+        updateNavigationState();
     }
 
     function showFinalSummary() {
         document.getElementById('progressFill').style.width = '100%';
         document.getElementById('quizForm').style.display = 'none';
         
+        // Calculate the score based ONLY on the initial selections
+        let finalScore = 0;
+        quizData.forEach((item, idx) => {
+            if (initialChoices[idx] === item.correct) {
+                finalScore++;
+            }
+        });
+        
         const summaryBlock = document.getElementById('summaryBlock');
         const scoreText = document.getElementById('scoreText');
         
         summaryBlock.style.display = 'block';
-        scoreText.innerText = `Your Final Score: ${score} / ${quizData.length}`;
+        scoreText.innerText = `Your Final Score: ${finalScore} / ${quizData.length}`;
     }
 
     function restartQuiz() {
