@@ -428,7 +428,160 @@
                 "Incorrect. Do not count leading zeros.",
                 "Incorrect. Small decimal measurements with non-zero terminal numbers are unambiguous."
             ]
-        }
+        },
+        {
+    q: "What is the sum of 12.11 mL, 18.0 mL, and 1.013 mL?",
+    options: ["31.123 mL", "31.12 mL", "31.1 mL", "31 mL"],
+    correct: 2,
+    hint: "For addition, line up the terms vertically by the decimal. The number with the fewest decimal places wins.",
+    feedback: [
+      "Incorrect. This is the exact raw mathematical display without any rounding rules applied.",
+      "Incorrect. This tracks two decimal places, but one of your starting inputs is less precise.",
+      "Correct! The raw sum is 31.123 mL. Since 18.0 mL restricts accuracy to 1 decimal place, we round to 31.1 mL.",
+      "Incorrect. This over-rounds to a whole number, losing valid tenths-place details."
+    ]
+  },
+  {
+    q: "Evaluate the subtraction: 102.50 g - 43.218 g.",
+    options: ["59.282 g", "59.28 g", "59.3 g", "59 g"],
+    correct: 1,
+    hint: "Count decimal positions. The value 102.50 has two decimal places, while 43.218 has three.",
+    feedback: [
+      "Incorrect. This keeps all unrounded calculator digits.",
+      "Correct! The difference is 59.282 g. 102.50 g restricts precision to 2 decimal places, rounding to 59.28 g.",
+      "Incorrect. This rounds to 1 decimal place instead of matching the hundredths boundary.",
+      "Incorrect. Whole integer rounding drops verified measurement value depth."
+    ]
+  },
+  {
+    q: "What is the area of a rectangle with a length of 3.1 cm and a width of 4.67 cm?",
+    options: ["14.477 cm²", "14.5 cm²", "14 cm²", "14.4 cm²"],
+    correct: 2,
+    hint: "Multiplication depends entirely on total significant figure counts, not decimal placement limits.",
+    feedback: [
+      "Incorrect. This represents the raw, unrounded product.",
+      "Incorrect. This contains 3 sig figs, but your length factor only provides 2.",
+      "Correct! 3.1 cm has 2 sig figs, while 4.67 cm has 3. Rounding the product 14.477 cm² to 2 sig figs yields 14 cm².",
+      "Incorrect. Keeping 3 total digits violates multiplication precision constraints."
+    ]
+  },
+  {
+    q: "Calculate the density: 45.2 g / 3.107 mL.",
+    options: ["14.548 g/mL", "14.5 g/mL", "14.55 g/mL", "15 g/mL"],
+    correct: 1,
+    hint: "Count total significant digits in the mass numerator versus the volume denominator.",
+    feedback: [
+      "Incorrect. This represents raw calculator output.",
+      "Correct! 45.2 g has 3 sig figs, and 3.107 mL has 4. The quotient must be limited to 3 sig figs, giving 14.5 g/mL.",
+      "Incorrect. This matches the denominator's precision, but you must match the less precise numerator.",
+      "Incorrect. Rounding to 2 sig figs discards a valid decimal place."
+    ]
+  },
+  {
+    q: "Evaluate the mixed operation: (2.50 × 4.0) / 1.50.",
+    options: ["6.67", "6.7", "6.666", "6.70"],
+    correct: 1,
+    hint: "Determine the intermediate significant figure total inside the parentheses first before dividing.",
+    feedback: [
+      "Incorrect. This assumes the intermediate step provided three significant figures.",
+      "Correct! (2.50 × 4.0) gives 10. (limited to 2 sig figs by 4.0). Then, 10. / 1.50 limits the quotient to 2 sig figs: 6.7.",
+      "Incorrect. This is the unrounded fractional loop output.",
+      "Incorrect. Adding a decimal zero falsely claims 3 significant figures of precision."
+    ]
+  },
+  {
+    q: "Calculate 15.5 cm + 22.33 cm - 4.123 cm.",
+    options: ["33.707 cm", "33.71 cm", "33.7 cm", "34 cm"],
+    correct: 2,
+    hint: "Every single part here is addition or subtraction. Look for the overall fewest decimal places.",
+    feedback: [
+      "Incorrect. This represents unrounded calculator output.",
+      "Incorrect. This retains two decimal positions.",
+      "Correct! The fewest decimal positions belongs to 15.5 cm (1 place). Rounding the raw answer 33.707 cm yields 33.7 cm.",
+      "Incorrect. This rounds too heavily to a whole integer."
+    ]
+  },
+  {
+    q: "Evaluate: 0.00450 / 2.0.",
+    options: ["0.00225", "0.0023", "0.002", "0.0022"],
+    correct: 1,
+    hint: "Count total significant figures. Remember that leading zeros do not count, but trailing decimal zeros do.",
+    feedback: [
+      "Incorrect. This keeps 3 significant figures, but your divisor only contains 2.",
+      "Correct! 0.00450 has 3 sig figs, and 2.0 has 2. The result must have 2 sig figs, rounding 0.00225 up to 0.0023.",
+      "Incorrect. This over-rounds to a single significant digit.",
+      "Incorrect. This drops the rounding progression instead of moving upward from the 5 boundary."
+    ]
+  },
+  {
+    q: "What is the result of 1.008 × 5.0?",
+    options: ["5.04", "5.0", "5", "5.040"],
+    correct: 1,
+    hint: "Identify total sig figs. 1.008 has four, while 5.0 contains trailing decimal precision.",
+    feedback: [
+      "Incorrect. This maintains 3 significant digits.",
+      "Correct! 5.0 limits your calculation to 2 significant figures. The product 5.04 rounds down cleanly to 5.0.",
+      "Incorrect. Writing a bare 5 drops the required precision tracking zero.",
+      "Incorrect. Adding digits artificially inflates measured precision."
+    ]
+  },
+  {
+    q: "Perform the calculation: 200.0 - 0.15.",
+    options: ["199.85", "199.9", "200", "199.8"],
+    correct: 1,
+    hint: "Look at decimal positions. 200.0 has one place, while 0.15 extends out to two.",
+    feedback: [
+      "Correct! 200.0 limits your outcome to 1 decimal place. The difference 199.85 rounds up to 199.9.",
+      "Incorrect. This preserves hundredths-place precision.",
+      "Incorrect. This over-rounds to a whole tracking index.",
+      "Incorrect. This rounds down instead of utilizing the 5 threshold to push upward."
+    ]
+  },
+  {
+    q: "Evaluate: (4.123 - 4.11) / 2.000.",
+    options: ["0.0065", "0.007", "0.00650", "0.01"],
+    correct: 1,
+    hint: "Perform subtraction first. The difference determines the significant figures available for division.",
+    feedback: [
+      "Incorrect. This assumes the difference has two significant digits.",
+      "Correct! Subtraction gives 0.013 (limited to 2 decimal places, meaning 1 sig fig). 0.013 / 2.000 rounds to 1 sig fig: 0.007.",
+      "Incorrect. This claims 3 significant figures, which violates the subtraction limit.",
+      "Incorrect. This over-rounds the calculation completely."
+    ]
+  },
+  {
+    q: "Evaluate the product: (3.0 × 10⁴) × (2.00 × 10⁻²).",
+    options: ["6.00 × 10²", "6.0 × 10²", "6 × 10²", "6.000 × 10²"],
+    correct: 1,
+    hint: "Compare total sig figs. 3.0 has two, while 2.00 has three.",
+    feedback: [
+      "Incorrect. This overstate precision with 3 sig figs.",
+      "Correct! The limiting factor is 3.0 (2 sig figs). The result must explicitly present 2 significant figures: 6.0 × 10².",
+      "Incorrect. This drops the trailing zero, reducing precision down to a single digit.",
+      "Incorrect. This introduces extra unverified digits into the scientific notation."
+    ]
+  },
+  {
+    q: "Calculate the total mass of 3 pellets if one pellet weighs 4.520 g (3 is an absolute counted count).",
+    options: ["13.56 g", "13.560 g", "14 g", "13.6 g"],
+    correct: 1,
+    hint: "Counted integers or exact definitions possess infinite precision and do not limit calculations.",
+    feedback: [
+      "Incorrect. This drops the trailing zero, reducing the precision count.",
+      "Correct! The integer 3 is exact. 4.520 g contains 4 sig figs, so the output must preserve 4 sig figs: 13.560 g.",
+      "Incorrect. This acts as if the counted item was an approximated single-digit lab measurement.",
+      "Incorrect. This rounds down to three metrics unnecessarily."
+    ]
+  },
+  {
+    q: "What is the result of 50.00 / 4.00?",
+    options: ["12.5", "12.50", "13", "12.500"],
+    correct: 0,
+    hint: "Count total significant digits in both the dividend and the divisor terms.",
+    feedback: [
+      "Correct! Both 50.00 (4 sig figs) and 4.00 (3 sig figs) limit the final quotient to 3 sig figs, matching..."
+    ]
+  }
     ];
 
     let currentQuestionIdx = 0;
