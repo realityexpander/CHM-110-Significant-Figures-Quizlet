@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Significant Figures Mastery Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .quiz-container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+        .progress-bar {
+            height: 6px;
+            background-color: #e2e8f0;
+            border-radius: 3px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #3498db;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .question-block {
+            display: none;
+        }
+        .question-block.active {
+            display: block;
+        }
+        .question-text {
+            font-weight: 600;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #2d3748;
+            line-height: 1.5;
+        }
+        .option-label {
+            display: block;
+            margin: 12px 0;
+            padding: 14px;
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1em;
+        }
+        .option-label:hover {
+            background: #f7fafc;
+            border-color: #cbd5e0;
+        }
+        .option-label input {
+            margin-right: 12px;
+            transform: scale(1.1);
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            display: none;
+            line-height: 1.4;
+        }
+        .correct-feedback {
+            display: block;
+            background-color: #def7ec;
+            color: #03543f;
+            border-left: 4px solid #31c48d;
+        }
+        .incorrect-feedback {
+            display: block;
+            background-color: #fde8e8;
+            color: #9b1c1c;
+            border-left: 4px solid #f98080;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+        button {
+            padding: 12px 24px;
+            background: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+        }
+        #summaryBlock {
+            display: none;
+            text-align: center;
+        }
+        .score-display {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #2b6cb0;
+            margin: 20px 0;
+            padding: 20px;
+            background: #e8f4fd;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Significant Figures Mastery Quiz</h1>
+    <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+    </div>
+    
+    <div id="quizForm">
+        <div id="questionsContainer"></div>
+        <div class="nav-buttons">
+            <button id="nextBtn" onclick="processNextStep()" disabled>Check Answer</button>
+        </div>
+    </div>
+
+    <div id="summaryBlock">
+        <h2>Quiz Completed!</h2>
+        <div id="scoreText" class="score-display"></div>
+        <button onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            q: "How many significant figures are in the measurement 0.003050 g?",
+            options: ["3", "5", "4", "6"],
+            correct: 2,
+            feedback: [
+                "Incorrect. Leading zeros are never counted as significant figures. You may have missed the trailing zero after the 5.",
+                "Incorrect. This overcounts by including the leading placeholder zeros which carry no significance regarding measured precision.",
+                "Correct! The leading zeros are placeholders and not significant. The digits 3, 0, 5, and the final trailing zero after the decimal point are all significant, totaling 4.",
+                "Incorrect. This counts every single digit present, ignoring the rule that leading zeros do not count as significant figures."
+            ]
+        },
+        {
+            q: "How many significant figures are in the number 402.105?",
+            options: ["3", "4", "5", "6"],
+            correct: 3,
+            feedback: [
+                "Incorrect. Trapped zeros and digits between non-zero numbers are always significant.",
+                "Incorrect. Every digit listed here (including the trapped zero and the final non-zero digit) is part of the precision measurement.",
+                "Incorrect. Count all the individual digits shown in the number carefully from left to right.",
+                "Correct! All digits in 402.105 (4, 0, 2, 1, 0, and 5) are significant because the zero is trapped between non-zero numbers and digits after the decimal are counted."
+            ]
+        },
+        {
+            q: "How many significant figures are in the value 3.020 × 10<sup>-4</sup> kg?",
+            options: ["4", "3", "2", "7"],
+            correct: 0,
+            feedback: [
+                "Correct! In scientific notation, all digits in the coefficient (including the trapped zero and the trailing zero in the decimal portion) are significant, giving 4 significant figures.",
+                "Incorrect. Do not forget that trailing zeros in the decimal portion of a coefficient in scientific notation count as significant.",
+                "Incorrect. This underestimates the precision; coefficients in scientific notation retain all their explicit digits.",
+                "Incorrect. The power of ten factor (10^-4) does not add to the count of significant figures of the measured coefficient."
+            ]
+        },
+        {
+            q: "The measurement 45,000 g is ambiguous regarding its precision. How should you write this value in scientific notation to correctly indicate exactly 3 significant figures?",
+            options: ["4.5 × 10<sup>4</sup> g", "4.50 × 10<sup>4</sup> g", "4.500 × 10<sup>4</sup> g", "45.0 × 10<sup>3</sup> g"],
+            correct: 1,
+            feedback: [
+                "Incorrect. This format only shows 2 significant figures in the coefficient.",
+                "Correct! 4.50 × 10^4 explicitly presents a coefficient with 3 significant figures, clearing up the ambiguity of standard trailing zeros in whole integers.",
+                "Incorrect. This coefficient contains 4 significant figures instead of the requested 3.",
+                "Incorrect. While numerically equal to 45,000, a properly formatted coefficient in scientific notation must be between 1 and 10."
+            ]
+        },
+        {
+            q: "A distance is measured as 700,000 m, but you wish to express it with an explicit precision of 4 significant figures. Which representation is correct?",
+            options: ["7.0 × 10<sup>5</sup> m", "7.00 × 10<sup>5</sup> m", "7.000 × 10<sup>5</sup> m", "7 × 10<sup>5</sup> m"],
+            correct: 2,
+            feedback: [
+                "Incorrect. This provides only 2 significant figures instead of the requested 4.",
+                "Incorrect. This gives 3 significant figures, which falls short of the target count of 4.",
+                "Correct! Writing the coefficient as 7.000 yields exactly 4 significant figures while correctly representing the original scale of 700,000 m.",
+                "Incorrect. This reduces the value to a single significant figure."
+            ]
+        },
+        {
+            q: "How must the value 3000 L be written in scientific notation to unambiguously show that it has 2 significant figures?",
+            options: ["3 × 10<sup>3</sup> L", "3.000 × 10<sup>3</sup> L", "3.00 × 10<sup>3</sup> L", "3.0 × 10<sup>3</sup> L"],
+            correct: 3,
+            feedback: [
+                "Incorrect. This coefficient shows only 1 significant figure.",
+                "Incorrect. This implies 4 significant figures instead of the required 2.",
+                "Incorrect. This shows 3 significant figures rather than 2.",
+                "Correct! The coefficient 3.0 has exactly 2 significant figures, providing an unambiguous standard format for this precision."
+            ]
+        },
+        {
+            q: "What is the sum of 14.2 mL, 8.35 mL, and 1.021 mL, reported to the correct number of decimal places?",
+            options: ["23.6 mL", "23.571 mL", "23.57 mL", "24 mL"],
+            correct: 0,
+            feedback: [
+                "Correct! The raw sum is 23.571 mL. For addition and subtraction, the result is limited by the number with the fewest decimal places (14.2 mL has one decimal place), so you round to one decimal place: 23.6 mL.",
+                "Incorrect. This is the raw mathematical calculation without applying the rule of limiting decimal precision.",
+                "Incorrect. This retains two decimal places, which exceeds the precision supported by 14.2 mL.",
+                "Incorrect. This rounds too aggressively to whole numbers, ignoring the valid tenths place."
+            ]
+        },
+        {
+            q: "Evaluate the subtraction problem: 352.4 g - 7.15 g, following the correct rules for significant figures.",
+            options: ["345.25 g", "345.3 g", "345 g", "345.2 g"],
+            correct: 1,
+            feedback: [
+                "Incorrect. This retains unrounded digits beyond the limiting decimal place of the original measurements.",
+                "Correct! The raw difference is 345.25 g. Since 352.4 g limits the precision to the tenths place (1 decimal place), 345.25 rounds up to 345.3 g.",
+                "Incorrect. This rounds away the tenths place value which is validly maintained from 352.4 g.",
+                "Incorrect. This fails to round the 2 up to a 3 based on the following digit (5)."
+            ]
+        },
+        {
+            q: "What is the area of a floor measuring 4.2 m by 5.65 m, reported to the proper number of significant figures?",
+            options: ["23.73 m²", "23.7 m²", "24 m²", "23 m²"],
+            correct: 2,
+            feedback: [
+                "Incorrect. This is the unrounded calculator value and ignores the limitation of significant figures.",
+                "Incorrect. This retains 3 significant figures, but the factor 4.2 has only 2 significant figures.",
+                "Correct! The raw product is 23.73 m². Multiplication results are limited by the factor with the fewest significant figures (4.2 m has 2 sig figs), requiring the answer to be rounded to 2 significant figures (24 m²).",
+                "Incorrect. This rounds down incorrectly; 23.73 must round up when restricted to two significant figures."
+            ]
+        },
+        {
+            q: "Calculate the density of an object with a mass of 18.4 g and a volume of 2.3 mL, reported to the correct number of significant figures.",
+            options: ["7.99 g/mL", "8 g/mL", "8.00 g/mL", "8.0 g/mL"],
+            correct: 3,
+            feedback: [
+                "Incorrect. This is a mathematical miscalculation and fails to respect the total significant figures of the inputs.",
+                "Incorrect. Writing 8 g/mL drops the explicit decimal precision needed to show 2 significant figures properly.",
+                "Incorrect. This overstates precision by implying 3 significant figures, whereas 2.3 mL has only 2 sig figs.",
+                "Correct! Mass (18.4 g) has 3 significant figures, and volume (2.3 mL) has 2 significant figures. The quotient 18.4 / 2.3 = 8.0 g/mL, limited to 2 significant figures."
+            ]
+        },
+        {
+            q: "How many significant figures are in the whole number 52,000?",
+            options: ["2", "5", "3", "4"],
+            correct: 0,
+            feedback: [
+                "Correct! Trailing zeros in a whole number without an explicit decimal point are placeholder constraints, leaving only 5 and 2 as significant.",
+                "Incorrect. This counts all numeric placeholders, which overrepresents measured hardware accuracy.",
+                "Incorrect. Trailing zeros without a decimal point do not count.",
+                "Incorrect. Only the non-zero digits are significant here."
+            ]
+        },
+        {
+            q: "How many significant figures are in the value 500.?",
+            options: ["1", "2", "3", "Infinite"],
+            correct: 2,
+            feedback: [
+                "Incorrect. The decimal point at the very end indicates that the zeros were explicitly measured.",
+                "Incorrect. The decimal point applies to all trailing zeros preceding it.",
+                "Correct! The presence of an explicit terminal decimal point marks all trailing zeros as significant measurements, yielding 3 sig figs.",
+                "Incorrect. This is a physical measurement, not a defined exact counting constant."
+            ]
+        },
+        {
+            q: "Multiply 1.5 × 2.00. Express the answer to the correct number of significant figures.",
+            options: ["3", "3.0", "3.00", "3.000"],
+            correct: 1,
+            feedback: [
+                "Incorrect. This drops essential precision; 1.5 dictates that our final calculation must maintain exactly 2 sig figs.",
+                "Correct! 1.5 contains 2 significant figures, while 2.00 contains 3. Multiplication defaults to the lower total count (2), resulting in 3.0.",
+                "Incorrect. This carries 3 significant figures, which violates the constraint limit of 1.5.",
+                "Incorrect. This overstates the precision boundary significantly."
+            ]
+        },
+        {
+            q: "Calculate 10.000 ÷ 2.0 and report the answer with the correct precision limits.",
+            options: ["5", "5.0", "5.00", "5.000"],
+            correct: 1,
+            feedback: [
+                "Incorrect. This only reflects 1 significant figure.",
+                "Correct! 10.000 has 5 sig figs, but 2.0 has only 2 sig figs. The division rule requires rounding to match the minimum total count (2), resulting in 5.0.",
+                "Incorrect. This overrepresents the limitations dictated by the divisor 2.0.",
+                "Incorrect. This drops validation constraints for division operations."
+            ]
+        },
+        {
+            q: "Express the decimal value 0.000034 in proper scientific notation while preserving significant figures.",
+            options: ["34 × 10<sup>-6</sup>", "3.4 × 10<sup>-5</sup>", "3.40 × 10<sup>-5</sup>", "0.34 × 10<sup>-4</sup>"],
+            correct: 1,
+            feedback: [
+                "Incorrect. The coefficient must be a number between 1 and 10.",
+                "Correct! 0.000034 contains exactly 2 significant figures (leading zeros do not count). Moving the decimal 5 places right yields 3.4 × 10^-5.",
+                "Incorrect. Adding a trailing zero changes the precision to 3 significant figures.",
+                "Incorrect. Standard scientific notation requires a single non-zero digit to the left of the decimal."
+            ]
+        },
+        {
+            q: "Evaluate the addition operation 100.5 + 0.025 and apply the proper rounding constraints.",
+            options: ["100.525", "100.53", "100.5", "101"],
+            correct: 2,
+            feedback: [
+                "Incorrect. This is the unrounded calculator output.",
+                "Incorrect. Addition focuses on decimal places, not significant figure count configurations.",
+                "Correct! For addition, the result is limited by the least number of decimal places. 100.5 has 1 decimal place, so 100.525 rounds to 100.5.",
+                "Incorrect. This rounds away valid tenths-place measurement details."
+            ]
+        },
+        {
+            q: "Perform the multi-step operation: (2.50 × 4.0) ÷ 1.234. Round the final value properly.",
+            options: ["8.1037", "8.10", "8.1", "8"],
+            correct: 2,
+            feedback: [
+                "Incorrect. This is unrounded calculator output.",
+                "Incorrect. Review the limiting intermediate step counts closely.",
+                "Correct! The product (2.50 × 4.0) evaluates to 10. (limited to 2 sig figs by 4.0). Then, 10. ÷ 1.234 forces the final quotient to maintain 2 sig figs, yielding 8.1.",
+                "Incorrect. This undercuts precision down to a single digit boundary."
+            ]
+        },
+        {
+            q: "How many significant figures are in an exact conversion factor definition, such as 1 inch = 2.54 cm?",
+            options: ["1", "3", "4", "Infinite"],
+            correct: 3,
+            feedback: [
+                "Incorrect. Defined conversions are not approximated measurements.",
+                "Incorrect. Do not apply standard trailing/trapped digits counting rules to established unit definitions.",
+                "Incorrect. Definitions do not limit calculation precision calculations.",
+                "Correct! Pure definitions, counting constants, or exact items possess infinite significant figures and never limit calculation precision boundaries."
+            ]
+        },
+        {
+            q: "Multiply (6.02 × 10<sup>23</sup>) × (2.0 × 10<sup>-2</sup>) and express the result in proper scientific notation.",
+            options: ["1.204 × 10<sup>22</sup>", "1.20 × 10<sup>22</sup>", "1.2 × 10<sup>22</sup>", "12 × 10<sup>21</sup>"],
+            correct: 2,
+            feedback: [
+                "Incorrect. This retains 4 sig figs, which exceeds the limitation set by 2.0.",
+                "Incorrect. This implies 3 significant figures of precision.",
+                "Correct! 6.02 has 3 sig figs, while 2.0 has 2 sig figs. The product must contain 2 significant figures. 12.04 × 10^21 normalizes to 1.2 × 10^22.",
+                "Incorrect. The coefficient must remain between 1 and 10."
+            ]
+        },
+        {
+            q: "How many significant figures are in the ultra-small measurement 0.0000007 m?",
+            options: ["1", "7", "8", "Ambiguous"],
+            correct: 0,
+            feedback: [
+                "Correct! All leading zeros in a decimal scale are purely positional placeholders. Only the terminal digit 7 is significant, yielding 1 sig fig.",
+                "Incorrect. This counts the positional placeholders tracking scale depth.",
+                "Incorrect. Do not count leading zeros.",
+                "Incorrect. Small decimal measurements with non-zero terminal numbers are perfectly unambiguous."
+            ]
+        }
+    ];
+
+    let currentQuestionIdx = 0;
+    let score = 0;
+    let isShowingFeedback = false;
+
+    function initQuiz() {
+        const container = document.getElementById('questionsContainer');
+        container.innerHTML = '';
+        currentQuestionIdx = 0;
+        score = 0;
+        isShowingFeedback = false;
+        
+        quizData.forEach((item, qIdx) => {
+            const qBlock = document.createElement('div');
+            qBlock.className = `question-block ${qIdx === 0 ? 'active' : ''}`;
+            qBlock.id = `qBlock${qIdx}`;
+            
+            let optionsHTML = '';
+            item.options.forEach((opt, oIdx) => {
+                optionsHTML += `
+                    <label class="option-label" id="label_${qIdx}_${oIdx}">
+                        <input type="radio" name="qRadio${qIdx}" value="${oIdx}" onchange="enableCheckButton()">
+                        ${opt}
+                    </label>
+                `;
+            });
+            
+            qBlock.innerHTML = `
+                <div class="question-text">${qIdx + 1}. ${item.q}</div>
+                ${optionsHTML}
+                <div id="feedbackBox${qIdx}" class="feedback"></div>
+            `;
+            container.appendChild(qBlock);
+        });
+
+        document.getElementById('quizForm').style.display = 'block';
+        document.getElementById('summaryBlock').style.display = 'none';
+        updateNavigationState();
+    }
+
+    function enableCheckButton() {
+        if (!isShowingFeedback) {
+            document.getElementById('nextBtn').disabled = false;
+        }
+    }
+
+    function updateNavigationState() {
+        const nextBtn = document.getElementById('nextBtn');
+        const progressFill = document.getElementById('progressFill');
+        
+        const progressPercent = (currentQuestionIdx / quizData.length) * 100;
+        progressFill.style.width = `${progressPercent}%`;
+
+        if (!isShowingFeedback) {
+            nextBtn.innerText = "Check Answer";
+            const checkedRadio = document.querySelector(`input[name="qRadio${currentQuestionIdx}"]:checked`);
+            nextBtn.disabled = !checkedRadio;
+        } else {
+            nextBtn.innerText = currentQuestionIdx === quizData.length - 1 ? "View Results" : "Next Question";
+            nextBtn.disabled = false;
+        }
+    }
+
+    function processNextStep() {
+        if (!isShowingFeedback) {
+            const selectedRadio = document.querySelector(`input[name="qRadio${currentQuestionIdx}"]:checked`);
+            if (!selectedRadio) return;
+
+            const selectedIdx = parseInt(selectedRadio.value);
+            const currentItem = quizData[currentQuestionIdx];
+            const feedbackBox = document.getElementById(`feedbackBox${currentQuestionIdx}`);
+            
+            const radios = document.querySelectorAll(`input[name="qRadio${currentQuestionIdx}"]`);
+            radios.forEach(r => r.disabled = true);
+
+            feedbackBox.innerHTML = currentItem.feedback[selectedIdx];
+            
+            if (selectedIdx === currentItem.correct) {
+                score++;
+                feedbackBox.className = "feedback correct-feedback";
+                document.getElementById(`label_${currentQuestionIdx}_${selectedIdx}`).style.borderColor = "#31c48d";
+                document.getElementById(`label_${currentQuestionIdx}_${selectedIdx}`).style.backgroundColor = "#def7ec";
+            } else {
+                feedbackBox.className = "feedback incorrect-feedback";
+                document.getElementById(`label_${currentQuestionIdx}_${selectedIdx}`).style.borderColor = "#f98080";
+                document.getElementById(`label_${currentQuestionIdx}_${selectedIdx}`).style.backgroundColor = "#fde8e8";
+                document.getElementById(`label_${currentQuestionIdx}_${currentItem.correct}`).style.borderColor = "#31c48d";
+            }
+            
+            isShowingFeedback = true;
+            updateNavigationState();
+        } else {
+            isShowingFeedback = false;
+            const currentBlock = document.getElementById(`qBlock${currentQuestionIdx}`);
+            currentBlock.classList.remove('active');
+            
+            currentQuestionIdx++;
+            
+            if (currentQuestionIdx < quizData.length) {
+                const nextBlock = document.getElementById(`qBlock${currentQuestionIdx}`);
+                nextBlock.classList.add('active');
+                updateNavigationState();
+            } else {
+                showFinalSummary();
+            }
+        }
+    }
+
+    function showFinalSummary() {
+        document.getElementById('progressFill').style.width = '100%';
+        document.getElementById('quizForm').style.display = 'none';
+        
+        const summaryBlock = document.getElementById('summaryBlock');
+        const scoreText = document.getElementById('scoreText');
+        
+        summaryBlock.style.display = 'block';
+        scoreText.innerText = `Your Final Score: ${score} / ${quizData.length}`;
+    }
+
+    function restartQuiz() {
+        initQuiz();
+    }
+
+    window.onload = initQuiz;
+</script>
+
+</body>
+</html>
