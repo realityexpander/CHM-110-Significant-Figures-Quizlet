@@ -9,7 +9,7 @@ Live Web App:
 https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/
 
 🌟 Key Features of Quiz
-  - 20 Advanced Questions:
+  - 20 Essential & Edge Case Questions:
     - Fully expanded tracking database exploring zero categories, non-zeros, decimal limits, explicit terminal periods (500.), multi-step operations, and defined exact dimensions.
   - 3 Mandatory Scientific Notation Problems:
     - Includes strict conditions verifying standard base values sitting strictly between 1 and 10 to represent numbers without positional placeholder ambiguity.
