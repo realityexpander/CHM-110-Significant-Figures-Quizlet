@@ -3,7 +3,7 @@ Here is a comprehensive, 20-question practice exam covering all areas of signifi
 
 Gives hints and reasons why answer is wrong, so you can quickly become skilled at the infamous SIGFIGS problems!
 
-<img width="634" height="592" alt="image" src="https://github.com/user-attachments/assets/964b023a-72af-449a-bfaf-857310f9b657" />
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/964b023a-72af-449a-bfaf-857310f9b657" />
 
 Live Web App:
 https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/
@@ -36,7 +36,7 @@ https://share.google/aimode/8un8RWXo4JFjsZ0U8
 
 For simulation of a written test.
 
-<img width="713" alt="image" src="https://github.com/user-attachments/assets/95b9da0a-026b-48cd-b65b-764ff0b85900" />
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/95b9da0a-026b-48cd-b65b-764ff0b85900" />
 
 Link to advanced quiz:
 https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/advanced_significant_figures_chemistry_quiz.html
@@ -136,5 +136,7 @@ Link to original ChatGPT Plus conversation: https://chatgpt.com/s/t_6a91de19dc84
 
 Hint Sheets:
 
-<img width="822" alt="image" src="https://github.com/user-attachments/assets/74f07f52-7f89-4c38-896a-e85b3584e56b" />
-<img width="808" alt="image" src="https://github.com/user-attachments/assets/6d7a2374-b493-4908-a872-4d491f1049cc" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/74f07f52-7f89-4c38-896a-e85b3584e56b" />
+
+
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/6d7a2374-b493-4908-a872-4d491f1049cc" />
