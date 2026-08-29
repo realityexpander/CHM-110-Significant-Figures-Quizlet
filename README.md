@@ -133,3 +133,8 @@ This project is intended as a study and review tool for students taking **Genera
 The emphasis is not simply on getting the numerical answer correct, but on understanding **why a particular number of significant figures or decimal places must be reported**.
 
 Link to original ChatGPT Plus conversation: https://chatgpt.com/s/t_6a91de19dc848191bea9ddd171397372
+
+Hint Sheets:
+
+<img width="822" alt="image" src="https://github.com/user-attachments/assets/74f07f52-7f89-4c38-896a-e85b3584e56b" />
+<img width="808" alt="image" src="https://github.com/user-attachments/assets/6d7a2374-b493-4908-a872-4d491f1049cc" />
