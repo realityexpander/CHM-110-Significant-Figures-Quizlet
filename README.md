@@ -28,7 +28,7 @@ Prompt for Gemini AI:
   5) Allow for "correct" and "incorrect" choices, like you have in your quiz.
   6) Only score the initial choice, but allow for multiple choices, and give the reason for the choice being wrong or right based on the last option chosen.
   7) Make sure to provide the downloadable file because just giving the text is making an error because of text injection about "Use code with caution."
-  8) Here is the link to the original conversation: (WARNING: it made a lot of accidental mistaken code generations)
+  - Here is the link to the original conversation: (WARNING: it made a lot of accidental mistaken code generations)
 https://share.google/aimode/8un8RWXo4JFjsZ0U8
 
 # Advanced Quiz:
