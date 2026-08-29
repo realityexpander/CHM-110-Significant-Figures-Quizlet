@@ -31,10 +31,9 @@ Prompt for Gemini AI:
   - Here is the link to the original conversation: (WARNING: it made a lot of accidental mistaken code generations)
 https://share.google/aimode/8un8RWXo4JFjsZ0U8
 
-# Advanced Quiz:
-## Advanced Significant Figures Quiz App
+# Advanced Significant Figures Quiz - Written exam simulation
 
-For simulation of a written test.
+This version of the quiz is a simulation of a written exam test.
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/95b9da0a-026b-48cd-b65b-764ff0b85900" />
 
@@ -78,6 +77,7 @@ The app covers both the standard rules and common edge cases students encounter 
   * Preserving significant figures
   * Rounding that changes the exponent
   * Representing trailing zeros unambiguously
+  * Accepts the following notation formats: `3.2e-7` OR `3.2x10^-7` OR `3.2*10^-7`
 
 * **Chemistry Edge Cases**
 
