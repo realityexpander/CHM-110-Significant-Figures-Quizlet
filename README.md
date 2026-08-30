@@ -44,7 +44,6 @@ An interactive, single-page HTML quiz designed to help chemistry students practi
 
 The app covers both the standard rules and common edge cases students encounter in introductory chemistry, including counting significant figures, rounding, arithmetic operations, scientific notation, exact numbers, and multi-step calculations.
 
-
 ## Purpose
 
 This project is intended as a study and review tool and a simulation of a written test for students taking **General Chemistry, Introductory Chemistry, or other science courses where measurement precision and significant figures are required**.
@@ -93,7 +92,33 @@ The emphasis is not simply on getting the numerical answer correct, but on under
   * Results near zero
   * Rounding across place values
   * Numbers such as `1000`, `100.0`, and `0.0100`
+  * Uses professor specific rules for ambiguous integers with trailing zeros, ie: `5400`
 
+## Interactive Quiz Simulating a Written Test
+
+Each question includes:
+
+* Immediate answer checking
+* Correct/incorrect feedback
+* Explanation of the significant-figure rule involved
+* Optional hints
+* Running score
+* Accuracy percentage
+* Question progress
+* Shuffled questions
+* Multiple ways of entering scientific notation, ie: `1.2*10^-2`, `1.2x10^-2` and `1.2e-2` 
+
+Students can select focused practice sets for:
+
+* Mixed Practice
+* Counting Significant Figures
+* Multiplication & Division
+* Addition & Subtraction
+* Multi-Step Problems
+* Scientific Notation
+* Edge Cases
+
+Written with assist from ChatGPT 5.6-Sol Pro on High effort.
 Link to original ChatGPT Plus conversation: https://chatgpt.com/share/6a942866-5118-83e8-a9d8-000a7a3ff06c
 
 ## NOTE! Professor Specific Rules About Ambiguous Integers w/ Trailing Zeros
@@ -121,29 +146,6 @@ So:
 This does not change standalone counting questions. Therefore:
   - "How many significant figures are in 1000?" → 1
   - "How many significant figures are in 5000?" → 1
-
-## Interactive Quiz
-
-Each question includes:
-
-* Immediate answer checking
-* Correct/incorrect feedback
-* Explanation of the significant-figure rule involved
-* Optional hints
-* Running score
-* Accuracy percentage
-* Question progress
-* Shuffled questions
-
-Students can select focused practice sets for:
-
-* Mixed Practice
-* Counting Significant Figures
-* Multiplication & Division
-* Addition & Subtraction
-* Multi-Step Problems
-* Scientific Notation
-* Edge Cases
 
 ## No Installation Required
 
