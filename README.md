@@ -1,5 +1,5 @@
 # CHM-110 Comprehensive Significant Figures Mutliple Choice Quizlet with Hints & Advanced Quiz
-Here is a comprehensive, 20-question practice exam covering all areas of significant figures, including identifying counts, basic calculations, multi-step operations, and mandatory scientific notation conversions.
+This is a comprehensive, 20-question practice exam covering all areas of significant figures, including identifying counts, basic calculations, multi-step operations, and mandatory scientific notation conversions.
 
 Gives hints and reasons why answer is wrong, so you can quickly become skilled at the infamous SIGFIGS problems!
 
