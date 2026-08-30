@@ -2,7 +2,7 @@
 
 There are two tests included, a BASIC multiple-choice quiz with 33 questions, and an ADVANCED written test simulation with over 60 questions.
 
-# Multiple Choice Quizlet Covering the Essentials
+# BASIC Multiple Choice Quizlet Covering the Essentials
 This is a comprehensive, 33-question practice exam covering all essential areas of significant figures, including identifying counts, basic calculations, multi-step operations, and mandatory scientific notation conversions.
 
 Gives hints and reasons why answer is wrong, so you can quickly become skilled at the infamous SIGFIGS problems!
@@ -35,7 +35,7 @@ Prompt for Gemini AI that generated the app:
   - Here is the link to the original conversation: (WARNING: it made a lot of accidental mistaken code generations)
 https://share.google/aimode/8un8RWXo4JFjsZ0U8
 
-# Advanced Significant Figures Quiz - Written exam simulation
+# ADVANCED Significant Figures Quiz - Written exam simulation
 
 This version of the quiz is a simulation of a written exam test.
 
