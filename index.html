@@ -533,10 +533,10 @@
     correct: 1,
     hint: "Look at decimal positions. 200.0 has one place, while 0.15 extends out to two.",
     feedback: [
-      "Correct! 200.0 limits your outcome to 1 decimal place. The difference 199.85 rounds up to 199.9.",
-      "Incorrect. This preserves hundredths-place precision.",
-      "Incorrect. This over-rounds to a whole tracking index.",
-      "Incorrect. This rounds down instead of utilizing the 5 threshold to push upward."
+        "Incorrect. 199.85 is the unrounded difference. Because 200.0 is only precise to one decimal place, the final answer must be rounded to the tenths place.",
+        "Correct! 200.0 limits your outcome to 1 decimal place. The difference 199.85 rounds up to 199.9.",
+        "Incorrect. This over-rounds the result to a whole number and removes valid tenths-place precision.",
+        "Incorrect. The difference is 199.85, which rounds up to 199.9 at the tenths place, not down to 199.8."
     ]
   },
   {
@@ -566,13 +566,13 @@
   {
     q: "Calculate the total mass of 3 pellets if one pellet weighs 4.520 g (3 is an absolute counted count).",
     options: ["13.56 g", "13.560 g", "14 g", "13.6 g"],
-    correct: 1,
+    correct: 0,
     hint: "Counted integers or exact definitions possess infinite precision and do not limit calculations.",
     feedback: [
-      "Incorrect. This drops the trailing zero, reducing the precision count.",
-      "Correct! The integer 3 is exact. 4.520 g contains 4 sig figs, so the output must preserve 4 sig figs: 13.560 g.",
-      "Incorrect. This acts as if the counted item was an approximated single-digit lab measurement.",
-      "Incorrect. This rounds down to three metrics unnecessarily."
+        "Correct! The integer 3 is exact and does not limit precision. 4.520 g contains 4 significant figures. The raw product is 13.560 g, which must be reported with 4 significant figures as 13.56 g.",
+        "Incorrect. 13.560 g contains 5 significant figures. The measured value 4.520 g has 4 significant figures, so the final result must be reported as 13.56 g.",
+        "Incorrect. The exact counted quantity 3 does not reduce the precision to 2 significant figures.",
+        "Incorrect. 13.6 g contains only 3 significant figures, while 4.520 g allows the result to retain 4 significant figures."
     ]
   },
   {
