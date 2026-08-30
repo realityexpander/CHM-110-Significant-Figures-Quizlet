@@ -1,4 +1,8 @@
-# CHM-110 Comprehensive Significant Figures Mutliple Choice Quizlet with Hints & Advanced Quiz
+# CHM-110 Comprehensive Significant Figures Mutliple Choice Quizlet with Hints & Advanced Written-Test Simulation Quiz
+
+There are two tests included, a multiple-choice quiz with 33 questions, and an advanced written test simulation with over 60 questions.
+
+# Multiple Choice Quizlet Covering the Essentials
 This is a comprehensive, 33-question practice exam covering all essential areas of significant figures, including identifying counts, basic calculations, multi-step operations, and mandatory scientific notation conversions.
 
 Gives hints and reasons why answer is wrong, so you can quickly become skilled at the infamous SIGFIGS problems!
