@@ -132,24 +132,26 @@ This project is intended as a study and review tool for students taking **Genera
 
 The emphasis is not simply on getting the numerical answer correct, but on understanding **why a particular number of significant figures or decimal places must be reported**.
 
-Link to original ChatGPT Plus conversation: https://chatgpt.com/s/t_6a91de19dc848191bea9ddd171397372
+Link to original ChatGPT Plus conversation: https://chatgpt.com/share/6a942866-5118-83e8-a9d8-000a7a3ff06c
 
-## Professor specific rules for ambiguous case of Integers with trailing zeros
+## Professor Rules About Ambiguous Integers w/ Trailing Zeros
 A Professor-specific rule being applied to calculate the significant figures.
 
-For problems involving addition or subtraction, if a whole integer ends in one or more trailing zeros and no other precision notation is given, your professor treats every written digit as significant.
+For problems involving addition or subtraction, if a whole integer ends in one or more trailing zeros and no other precision notation is given, this professor treats every written digit as significant.
 
 So:
-
-23820 → 5 significant figures, precise to the ones place
-54270 → 5 significant figures, precise to the ones place
-1200 → 4 significant figures, precise to the ones place
-3400 → 4 significant figures, precise to the ones place
+  - For these kinds of problems (or any problem involving addition or substraction):
+    - `45.23 + 0.2934 + 23820 + 2.313 = 23867.8364 → 23868`
+    - `67.84 + 0.956 + 54270 + 3.819 = 54342.615 → 54343`
+  - Use these rules:
+    - `23820` → `5` significant figures, precise to the ones place
+    - `54270` → `5` significant figures, precise to the ones place
+    - `1200` → `4` significant figures, precise to the ones place
+    - `3400` → `4` significant figures, precise to the ones place
 
 This does not change standalone counting questions. Therefore:
-
-"How many significant figures are in 1000?" → 1
-"How many significant figures are in 5000?" → 1
+  - "How many significant figures are in 1000?" → 1
+  - "How many significant figures are in 5000?" → 1
 
 # Hint Sheets
 
