@@ -141,6 +141,15 @@ So:
     - `54270` → `5` significant figures, precise to the ones place
     - `340` → `3` significant figures, precise to the ones place
     - `1200` → `4` significant figures, precise to the ones place
+   
+    - From the professor: 
+      - ❝
+        - When adding and subtracting, the answer must have the same number of decimal places as the number in the problem with the least number of decimal places.
+            - You could answer with `23820` or `23820.` because neither of them have any decimal places and the total number of sig figs is not important.
+            - `23820` has `4` sig figs and `23820.` has `5` sig figs.
+            - The decimal point itself is important in determining the number of significant figures.
+        - However, in addition and subtraction, the number of sig figs is not important — it is the decimal places that matters.
+      - ❞
 
 ### IMPORTANT NOTE ABOUT AMBIGUOUS CASE OF TRAILING ZERO INTEGERS
   - Be aware that other professionals & professors do not necessarily follow this rule for the ambiguous integer case, and you must check with them to know what rule they expect applied.
