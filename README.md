@@ -44,6 +44,13 @@ An interactive, single-page HTML quiz designed to help chemistry students practi
 
 The app covers both the standard rules and common edge cases students encounter in introductory chemistry, including counting significant figures, rounding, arithmetic operations, scientific notation, exact numbers, and multi-step calculations.
 
+
+## Purpose
+
+This project is intended as a study and review tool and a simulation of a written test for students taking **General Chemistry, Introductory Chemistry, or other science courses where measurement precision and significant figures are required**.
+
+The emphasis is not simply on getting the numerical answer correct, but on understanding **why a particular number of significant figures or decimal places must be reported**.
+
 ## Features
 
 * **Counting Significant Figures**
@@ -87,6 +94,34 @@ The app covers both the standard rules and common edge cases students encounter 
   * Rounding across place values
   * Numbers such as `1000`, `100.0`, and `0.0100`
 
+Link to original ChatGPT Plus conversation: https://chatgpt.com/share/6a942866-5118-83e8-a9d8-000a7a3ff06c
+
+## NOTE! Professor Specific Rules About Ambiguous Integers w/ Trailing Zeros
+This advanced quiz is using a professor-specific rule being applied to ambiguous zeros when calculating the significant figures.
+
+For problems involving addition or subtraction, if a whole integer ends in one or more trailing zeros and no other precision notation is given, this professor treats expects every digit in the integer as significant including the trailing zero.
+
+So:
+  - For these kinds of problems (or any problem involving addition or substraction):
+    - `45.23 + 0.2934 + 23820 + 2.313 = 23867.8364 → 23868`
+    - `67.84 + 0.956 + 54270 + 3.819 = 54342.615 → 54343`
+    - `340 + 76.8 = 417`
+    - `1200 + 34.6 = 1235`
+  - Use these rules:
+    - `23820` → `5` significant figures, precise to the ones place
+    - `54270` → `5` significant figures, precise to the ones place
+    - `340` → `3` significant figures, precise to the ones place
+    - `1200` → `4` significant figures, precise to the ones place
+
+### IMPORTANT NOTE ABOUT AMBIGUOUS CASE OF TRAILING ZERO INTEGERS
+  - Be aware that other professionals & professors do not necessarily follow this rule for the ambiguous integer case, and you must check with them to know what rule they expect applied.
+  - For example, I used two different AI (Gemini & ChatGPT) will return different results for these problems!
+  - I used the TI-NSpire CX II "SigFigs" app available on their site, and it uses a different model, for example `340 + 76.8 = 420` in that program! 
+
+This does not change standalone counting questions. Therefore:
+  - "How many significant figures are in 1000?" → 1
+  - "How many significant figures are in 5000?" → 1
+
 ## Interactive Quiz
 
 Each question includes:
@@ -122,36 +157,9 @@ There are:
 * No database
 * No build process
 
-Simply download the HTML file and open it in a modern web browser.
+You can simply download the HTML file and open it in a modern web browser.
 
 Because the application runs entirely in the browser, it can also be hosted easily using **GitHub Pages** or any basic static web server.
-
-## Purpose
-
-This project is intended as a study and review tool for students taking **General Chemistry, Introductory Chemistry, or other science courses where measurement precision and significant figures are required**.
-
-The emphasis is not simply on getting the numerical answer correct, but on understanding **why a particular number of significant figures or decimal places must be reported**.
-
-Link to original ChatGPT Plus conversation: https://chatgpt.com/share/6a942866-5118-83e8-a9d8-000a7a3ff06c
-
-## Professor Rules About Ambiguous Integers w/ Trailing Zeros
-A Professor-specific rule being applied to calculate the significant figures.
-
-For problems involving addition or subtraction, if a whole integer ends in one or more trailing zeros and no other precision notation is given, this professor treats every written digit as significant.
-
-So:
-  - For these kinds of problems (or any problem involving addition or substraction):
-    - `45.23 + 0.2934 + 23820 + 2.313 = 23867.8364 → 23868`
-    - `67.84 + 0.956 + 54270 + 3.819 = 54342.615 → 54343`
-  - Use these rules:
-    - `23820` → `5` significant figures, precise to the ones place
-    - `54270` → `5` significant figures, precise to the ones place
-    - `1200` → `4` significant figures, precise to the ones place
-    - `3400` → `4` significant figures, precise to the ones place
-
-This does not change standalone counting questions. Therefore:
-  - "How many significant figures are in 1000?" → 1
-  - "How many significant figures are in 5000?" → 1
 
 # Hint Sheets
 
