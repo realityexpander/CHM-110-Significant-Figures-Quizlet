@@ -134,7 +134,24 @@ The emphasis is not simply on getting the numerical answer correct, but on under
 
 Link to original ChatGPT Plus conversation: https://chatgpt.com/s/t_6a91de19dc848191bea9ddd171397372
 
-Hint Sheets:
+## Professor specific rules for ambiguous case of Integers with trailing zeros
+A Professor-specific rule being applied to calculate the significant figures.
+
+For problems involving addition or subtraction, if a whole integer ends in one or more trailing zeros and no other precision notation is given, your professor treats every written digit as significant.
+
+So:
+
+23820 → 5 significant figures, precise to the ones place
+54270 → 5 significant figures, precise to the ones place
+1200 → 4 significant figures, precise to the ones place
+3400 → 4 significant figures, precise to the ones place
+
+This does not change standalone counting questions. Therefore:
+
+"How many significant figures are in 1000?" → 1
+"How many significant figures are in 5000?" → 1
+
+# Hint Sheets
 
 <img width="600" alt="image" src="https://github.com/user-attachments/assets/74f07f52-7f89-4c38-896a-e85b3584e56b" />
 
