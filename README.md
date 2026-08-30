@@ -145,7 +145,7 @@ So:
 ### IMPORTANT NOTE ABOUT AMBIGUOUS CASE OF TRAILING ZERO INTEGERS
   - Be aware that other professionals & professors do not necessarily follow this rule for the ambiguous integer case, and you must check with them to know what rule they expect applied.
   - For example, I used two different AI (Gemini & ChatGPT) will return different results for these problems!
-  - I used the TI-NSpire CX II "SigFigs" app available on their site, and it uses a different model, for example `340 + 76.8 = 420` in that program! 
+  - I used the TI-NSpire CX II Calculator app "SigFigs" (available on the TI site for free), and it uses a different model, for example `340 + 76.8 = 420` in that program! The professor's rules would result in `417` 
 
 This does not change standalone counting questions. Therefore:
   - "How many significant figures are in 1000?" → 1
