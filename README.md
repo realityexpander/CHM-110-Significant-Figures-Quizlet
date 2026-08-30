@@ -9,7 +9,7 @@ Live Web App:
 https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/
 
 🌟 Key Features of Quiz
-  - 20 Essential & Edge Case Questions:
+  - 33 Essential & Edge Case Questions:
     - Fully expanded tracking database exploring zero categories, non-zeros, decimal limits, explicit terminal periods (500.), multi-step operations, and defined exact dimensions.
   - 3 Mandatory Scientific Notation Problems:
     - Includes strict conditions verifying standard base values sitting strictly between 1 and 10 to represent numbers without positional placeholder ambiguity.
@@ -20,7 +20,7 @@ https://realityexpander.github.io/CHM-110-Significant-Figures-Quizlet/
   - Expandable Accordion Hints Drawers:
     - Incorporates a "💡 Need a Hint?" drop-down menu under each individual question block that auto-collapses smoothly when jumping rows.
 
-Prompt for Gemini AI:
+Prompt for Gemini AI that generated the app:
   1) Provide a downloadable link for the html code, not just generate code text.
   2) Write the html code in a single downloadable file for the above quiz exactly as you presented it.  Except make it 20 questions, not 10. 
   3) Be sure to give the "hints" drop-down section. 
